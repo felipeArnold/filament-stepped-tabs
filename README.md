@@ -2,6 +2,8 @@
 
 Chevron-style stepped tabs navigation with counters, for Filament (and any Livewire) pages.
 
+![Preview](art/preview.png)
+
 ## Why
 
 Filament's built-in `Tabs` component renders a pill-style tab bar. This package renders the same
