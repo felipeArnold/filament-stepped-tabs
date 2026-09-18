@@ -14,7 +14,7 @@ final class FilamentSteppedTabsServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package
-            ->name(static::$name)
+            ->name(self::$name)
             ->hasViews();
     }
 }

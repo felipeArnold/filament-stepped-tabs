@@ -8,4 +8,7 @@ parameters:
     level: 5
 
     ignoreErrors:
-        - '#Unsafe usage of new static#'
+        -
+            identifier: trait.unused
+            message: '#InteractsWithSteppedTabs is used zero times#'
+            path: src/Concerns/InteractsWithSteppedTabs.php

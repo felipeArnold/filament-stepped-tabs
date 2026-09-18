@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FelipeArnold\FilamentSteppedTabs\Tests\Fixtures;
 
 use FelipeArnold\FilamentSteppedTabs\Concerns\InteractsWithSteppedTabs;
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
 final class DummySteppedComponent extends Component
@@ -16,8 +17,8 @@ final class DummySteppedComponent extends Component
         return 'draft';
     }
 
-    public function render(): string
+    public function render(): View
     {
-        return '<div>{{ $activeStep }}</div>';
+        return view('dummy');
     }
 }
