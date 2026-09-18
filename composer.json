@@ -1,0 +1,63 @@
+{
+    "name": "felipearnold/filament-stepped-tabs",
+    "description": "Chevron-style stepped tabs navigation with counters for Filament (and any Livewire) pages.",
+    "keywords": ["filament", "livewire", "laravel", "tabs", "steps", "navigation"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Felipe Arnold",
+            "email": "felipearnold94@gmail.com"
+        }
+    ],
+    "homepage": "https://github.com/felipeArnold/filament-stepped-tabs",
+    "support": {
+        "issues": "https://github.com/felipeArnold/filament-stepped-tabs/issues",
+        "source": "https://github.com/felipeArnold/filament-stepped-tabs"
+    },
+    "require": {
+        "php": "^8.1",
+        "illuminate/support": "^10.0|^11.0|^12.0",
+        "livewire/livewire": "^3.0",
+        "filament/support": "^3.0|^4.0|^5.0",
+        "spatie/laravel-package-tools": "^1.14.0"
+    },
+    "require-dev": {
+        "larastan/larastan": "^2.0|^3.0",
+        "laravel/pint": "^1.21",
+        "orchestra/testbench": "^8.0|^9.0|^10.0",
+        "pestphp/pest": "^2.0|^3.0",
+        "pestphp/pest-plugin-laravel": "^2.0|^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "FelipeArnold\\FilamentSteppedTabs\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "FelipeArnold\\FilamentSteppedTabs\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "analyse": "vendor/bin/phpstan analyse",
+        "format": "vendor/bin/pint",
+        "test": "vendor/bin/pest"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "FelipeArnold\\FilamentSteppedTabs\\FilamentSteppedTabsServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
