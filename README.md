@@ -2,8 +2,10 @@
 
 Chevron-style stepped tabs navigation with counters, for Filament (and any Livewire) pages.
 
-<img width="2048" height="768" alt="9160b522-8e35-4136-99a2-28116d3ceea1" src="https://github.com/user-attachments/assets/719a297d-9535-488f-b88f-87ad0fecb584" />
+<div class="filament-hidden">
 
+<img width="2048" height="768" alt="9160b522-8e35-4136-99a2-28116d3ceea1" src="https://github.com/user-attachments/assets/719a297d-9535-488f-b88f-87ad0fecb584" />
+</div>
 
 ## Why
 
