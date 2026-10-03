@@ -9,14 +9,14 @@
         .fi-stepped-tab[data-first] { padding-inline-start: 1rem; }
         .fi-stepped-tab:not([data-first]) { margin-inline-start: calc(-1rem + 3px); }
         .fi-stepped-tab:hover { background-color: var(--gray-50); }
-        .fi-stepped-tab[data-active] { background-color: var(--gray-100); }
+        .fi-stepped-tab[data-active] { background-color: var(--gray-200); }
         .fi-stepped-tab .fi-stepped-tab-icon { color: var(--gray-400); }
-        .fi-stepped-tab[data-active] .fi-stepped-tab-icon { color: var(--gray-700); }
+        .fi-stepped-tab[data-active] .fi-stepped-tab-icon { color: var(--gray-800); }
         .fi-stepped-tab[data-active] .fi-stepped-tab-label { color: var(--gray-950); }
         .dark .fi-stepped-tabs { background-color: var(--gray-700); }
         .dark .fi-stepped-tab { background-color: var(--gray-900); }
         .dark .fi-stepped-tab:hover { background-color: var(--gray-800); }
-        .dark .fi-stepped-tab[data-active] { background-color: var(--gray-800); }
+        .dark .fi-stepped-tab[data-active] { background-color: var(--gray-700); }
         .dark .fi-stepped-tab[data-active] .fi-stepped-tab-icon { color: var(--gray-200); }
         .dark .fi-stepped-tab[data-active] .fi-stepped-tab-label { color: #fff; }
     </style>
