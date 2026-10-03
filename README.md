@@ -146,6 +146,15 @@ The view also accepts `property` (default `activeStep`): the Livewire property s
 | `->icon(string\|BackedEnum\|Htmlable\|null $icon)` | Optional icon (name or `Heroicon` enum), rendered via `x-filament::icon` |
 | `->color(?string $color)` | Reserved for future theming |
 
+## Translations
+
+The step counter ("1 item", "3 items") follows the app locale. Bundled: `en`, `pt_BR` and `pt_PT`.
+Publish to customize or add a locale:
+
+```bash
+php artisan vendor:publish --tag="filament-stepped-tabs-translations"
+```
+
 ## Testing
 
 ```bash

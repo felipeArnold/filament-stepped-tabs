@@ -84,3 +84,21 @@ it('cuts a notch on the left of the last step instead of an arrow', function ():
         ->toContain('polygon(0 0, 100% 0, 100% 100%, 0 100%, 16px 50%)')
         ->not->toContain('polygon(16px 0, 100% 0, 100% 100%, 16px 100%, 0 50%)');
 });
+
+it('translates the step counter to the app locale', function (string $locale, int $count, string $expected): void {
+    app()->setLocale($locale);
+
+    $html = view('filament-stepped-tabs::components.nav', [
+        'steps' => [StepTab::make('sent')->label('Enviados')->count($count)->toArray()],
+        'activeStep' => 'sent',
+    ])->render();
+
+    expect($html)->toContain($expected);
+})->with([
+    'pt_BR plural' => ['pt_BR', 2, '2 itens'],
+    'pt_BR singular' => ['pt_BR', 1, '1 item'],
+    'pt_BR zero' => ['pt_BR', 0, '0 itens'],
+    'pt_PT plural' => ['pt_PT', 3, '3 itens'],
+    'en singular' => ['en', 1, '1 item'],
+    'en plural' => ['en', 4, '4 items'],
+]);
