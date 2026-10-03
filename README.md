@@ -24,7 +24,39 @@ composer require felipearnold/filament-stepped-tabs
 
 ## Usage
 
-### 1. Add the trait to your Livewire component
+### Filament v4/v5 `ListRecords` with `getTabs()` (recommended)
+
+Keep your regular Filament tabs and add `HasSteppedTabs`. The page's `getTabs()` is rendered as stepped
+tabs: label and icon come from each `Tab`, and the counter is the number of records of that tab with the
+current table filters and search applied.
+
+```php
+use FelipeArnold\FilamentSteppedTabs\Concerns\HasSteppedTabs;
+use Filament\Schemas\Components\Tabs\Tab;
+
+class ListInvoices extends ListRecords
+{
+    use HasSteppedTabs;
+
+    public function getTabs(): array
+    {
+        return [
+            'draft' => Tab::make('Drafts')
+                ->icon('heroicon-o-pencil-square')
+                ->modifyQueryUsing(fn (Builder $query) => $query->where('status', 'draft')),
+            'all' => Tab::make('All')->icon('heroicon-o-queue-list'),
+        ];
+    }
+}
+```
+
+The active step is bound to Filament's own `$activeTab` property, so `?tab=` in the URL, the default tab
+and `modifyQueryUsing()` keep working unchanged. Each step runs one `count()` query.
+
+### Custom steps on any Livewire component
+
+
+#### 1. Add the trait to your Livewire component
 
 ```php
 use FelipeArnold\FilamentSteppedTabs\Concerns\InteractsWithSteppedTabs;
@@ -40,7 +72,7 @@ class ListEnvelopes extends ListRecords
 }
 ```
 
-### 2. Build your steps with `StepTab`
+#### 2. Build your steps with `StepTab`
 
 ```php
 use FelipeArnold\FilamentSteppedTabs\StepTab;
@@ -61,7 +93,7 @@ public function getSteps(): array
 }
 ```
 
-### 3. Render it and filter your query by `$this->activeStep`
+#### 3. Render it and filter your query by `$this->activeStep`
 
 **Filament v4/v5** (inside a `ListRecords` page, replacing `getTabsContentComponent()`):
 
@@ -102,6 +134,8 @@ protected function getTableQuery(): Builder
 <x-filament-stepped-tabs::nav :steps="$this->getSteps()" :active-step="$activeStep" />
 ```
 
+The view also accepts `property` (default `activeStep`): the Livewire property set when a step is clicked.
+
 ## Step options
 
 | Method | Description |
@@ -109,7 +143,7 @@ protected function getTableQuery(): Builder
 | `StepTab::make(string $key)` | Unique key (`[a-z0-9_-]+`), used for `activeStep` matching |
 | `->label(string $label)` | Display label (defaults to the key) |
 | `->count(int $count)` | Counter shown under the label |
-| `->icon(?string $icon)` | Optional heroicon name, rendered via `x-filament::icon` |
+| `->icon(string\|BackedEnum\|Htmlable\|null $icon)` | Optional icon (name or `Heroicon` enum), rendered via `x-filament::icon` |
 | `->color(?string $color)` | Reserved for future theming |
 
 ## Testing

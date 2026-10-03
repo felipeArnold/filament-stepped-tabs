@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace FelipeArnold\FilamentSteppedTabs;
 
+use BackedEnum;
+use Illuminate\Contracts\Support\Htmlable;
 use InvalidArgumentException;
 
 final class StepTab
@@ -12,7 +14,7 @@ final class StepTab
 
     private int $count = 0;
 
-    private ?string $icon = null;
+    private string|BackedEnum|Htmlable|null $icon = null;
 
     private ?string $color = null;
 
@@ -42,7 +44,7 @@ final class StepTab
         return $this;
     }
 
-    public function icon(?string $icon): self
+    public function icon(string|BackedEnum|Htmlable|null $icon): self
     {
         $this->icon = $icon;
 
@@ -57,7 +59,7 @@ final class StepTab
     }
 
     /**
-     * @return array{key: string, label: string, count: int, icon: ?string, color: ?string}
+     * @return array{key: string, label: string, count: int, icon: string|BackedEnum|Htmlable|null, color: ?string}
      */
     public function toArray(): array
     {
