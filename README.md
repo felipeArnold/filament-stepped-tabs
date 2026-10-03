@@ -1,8 +1,10 @@
+<div class="filament-hidden">
+<img src="https://raw.githubusercontent.com/felipeArnold/filament-stepped-tabs/refs/heads/main/art/felipeArnold-stepped-tabs.png" />
+</div>
+
 # Filament Stepped Tabs
 
 Chevron-style stepped tabs navigation with counters, for Filament (and any Livewire) pages.
-
-![Preview](art/preview.png)
 
 ## Why
 
