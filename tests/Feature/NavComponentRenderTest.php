@@ -22,7 +22,7 @@ it('renders all given steps with their count', function (): void {
         ->toContain('3 items');
 });
 
-it('marks the active step with a highlight class', function (): void {
+it('marks only the active step as current', function (): void {
     $steps = [
         StepTab::make('draft')->label('Drafts')->count(0)->toArray(),
         StepTab::make('sent')->label('In progress')->count(0)->toArray(),
@@ -33,7 +33,19 @@ it('marks the active step with a highlight class', function (): void {
         'activeStep' => 'sent',
     ])->render();
 
-    expect($html)->toContain('bg-blue-100');
+    expect(substr_count($html, 'aria-current="step"'))->toBe(1)
+        ->and($html)->toMatch('/data-active aria-current="step"\s+class="[^"]*"\s+style="[^"]*"\s*>\s*(?:<svg|<span)[\s\S]*In progress/');
+});
+
+it('aligns step content to the start', function (): void {
+    $html = view('filament-stepped-tabs::components.nav', [
+        'steps' => [StepTab::make('draft')->label('Drafts')->toArray()],
+        'activeStep' => 'draft',
+    ])->render();
+
+    expect($html)
+        ->toContain('justify-start')
+        ->not->toContain('justify-center');
 });
 
 it('renders the step icon when given', function (): void {
@@ -60,4 +72,15 @@ it('does not render an icon when none is given', function (): void {
     ])->render();
 
     expect($html)->not->toContain('svg');
+});
+
+it('cuts a notch on the left of the last step instead of an arrow', function (): void {
+    $html = view('filament-stepped-tabs::components.nav', [
+        'steps' => [StepTab::make('one')->toArray(), StepTab::make('two')->toArray()],
+        'activeStep' => 'one',
+    ])->render();
+
+    expect($html)
+        ->toContain('polygon(0 0, 100% 0, 100% 100%, 0 100%, 16px 50%)')
+        ->not->toContain('polygon(16px 0, 100% 0, 100% 100%, 16px 100%, 0 50%)');
 });
