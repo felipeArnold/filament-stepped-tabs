@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FelipeArnold\FilamentSteppedTabs\Tests\Fixtures;
 
+use Closure;
 use FelipeArnold\FilamentSteppedTabs\Concerns\HasSteppedTabs;
 use FelipeArnold\FilamentSteppedTabs\Tests\Fixtures\Models\Order;
 use Filament\Schemas\Components\Tabs\Tab;
@@ -16,6 +17,12 @@ final class DummyTabsPage extends Component
 {
     use HasSteppedTabs;
 
+    /** @var (Closure(): array<string, Tab>)|null */
+    public static ?Closure $tabsUsing = null;
+
+    /** @var (Closure(): Builder)|null */
+    public static ?Closure $queryUsing = null;
+
     public ?string $activeTab = 'open';
 
     public ?string $customer = null;
@@ -25,6 +32,10 @@ final class DummyTabsPage extends Component
      */
     public function getCachedTabs(): array
     {
+        if (self::$tabsUsing) {
+            return (self::$tabsUsing)();
+        }
+
         return [
             'open' => Tab::make('Open')
                 ->icon(Heroicon::OutlinedClock)
@@ -37,7 +48,8 @@ final class DummyTabsPage extends Component
 
     public function getFilteredTableQuery(): Builder
     {
-        $query = Order::query()->when($this->customer, fn (Builder $query, string $customer): Builder => $query->where('customer', $customer));
+        $query = (self::$queryUsing ? (self::$queryUsing)() : Order::query())
+            ->when($this->customer, fn (Builder $query, string $customer): Builder => $query->where('customer', $customer));
 
         $tabs = $this->getCachedTabs();
 
