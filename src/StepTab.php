@@ -18,6 +18,8 @@ final class StepTab
 
     private ?string $color = null;
 
+    private ?string $description = null;
+
     private function __construct(private readonly string $key)
     {
         if (preg_match('/^[a-z0-9_-]+$/', $key) !== 1) {
@@ -58,8 +60,15 @@ final class StepTab
         return $this;
     }
 
+    public function description(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
     /**
-     * @return array{key: string, label: string, count: int, icon: string|BackedEnum|Htmlable|null, color: ?string}
+     * @return array{key: string, label: string, count: int, icon: string|BackedEnum|Htmlable|null, color: ?string, description: ?string}
      */
     public function toArray(): array
     {
@@ -69,6 +78,7 @@ final class StepTab
             'count' => $this->count,
             'icon' => $this->icon,
             'color' => $this->color,
+            'description' => $this->description,
         ];
     }
 }

@@ -29,7 +29,7 @@ trait HasSteppedTabs
     }
 
     /**
-     * @return array<int, array{key: string, label: string, count: int, icon: mixed, color: ?string}>
+     * @return array<int, array{key: string, label: string, count: int, icon: mixed, color: ?string, description: ?string}>
      */
     public function getSteps(): array
     {

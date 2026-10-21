@@ -22,6 +22,23 @@ it('renders all given steps with their count', function (): void {
         ->toContain('3 items');
 });
 
+it('renders the step description after the count', function (): void {
+    $steps = [
+        StepTab::make('pending')->label('Pending')->count(2)->description('$ 1,250.00')->toArray(),
+        StepTab::make('all')->label('All')->count(5)->toArray(),
+    ];
+
+    $html = view('filament-stepped-tabs::components.nav', [
+        'steps' => $steps,
+        'activeStep' => 'all',
+    ])->render();
+
+    expect($html)
+        ->toContain('2 items · $ 1,250.00')
+        ->toContain('5 items')
+        ->and(substr_count($html, ' · '))->toBe(1);
+});
+
 it('marks only the active step as current', function (): void {
     $steps = [
         StepTab::make('draft')->label('Drafts')->count(0)->toArray(),

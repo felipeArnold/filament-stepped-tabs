@@ -52,7 +52,7 @@
                 @endif
                 <span class="flex flex-col items-start">
                     <span class="fi-stepped-tab-label text-sm font-semibold text-gray-900 dark:text-gray-100">{{ $step['label'] }}</span>
-                    <span class="fi-stepped-tab-count text-xs text-gray-500 dark:text-gray-400 tabular-nums">{{ trans_choice('filament-stepped-tabs::nav.count', $step['count'], ['count' => $step['count']]) }}</span>
+                    <span class="fi-stepped-tab-count text-xs text-gray-500 dark:text-gray-400 tabular-nums">{{ trans_choice('filament-stepped-tabs::nav.count', $step['count'], ['count' => $step['count']]) }}@if (filled($step['description'] ?? null)) · {{ $step['description'] }}@endif</span>
                 </span>
             </button>
         @endforeach

@@ -143,6 +143,7 @@ The view also accepts `property` (default `activeStep`): the Livewire property s
 | `StepTab::make(string $key)` | Unique key (`[a-z0-9_-]+`), used for `activeStep` matching |
 | `->label(string $label)` | Display label (defaults to the key) |
 | `->count(int $count)` | Counter shown under the label |
+| `->description(?string $description)` | Optional text after the counter, e.g. a total (`3 items · $ 1,250.00`) |
 | `->icon(string\|BackedEnum\|Htmlable\|null $icon)` | Optional icon (name or `Heroicon` enum), rendered via `x-filament::icon` |
 | `->color(?string $color)` | Reserved for future theming |
 

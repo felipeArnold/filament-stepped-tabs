@@ -16,7 +16,14 @@ it('builds a step via the fluent api with label, count and icon', function (): v
         'count' => 3,
         'icon' => 'heroicon-o-paper-airplane',
         'color' => null,
+        'description' => null,
     ]);
+});
+
+it('keeps a description to show next to the counter', function (): void {
+    $step = StepTab::make('pending')->count(2)->description('$ 1,250.00');
+
+    expect($step->toArray()['description'])->toBe('$ 1,250.00');
 });
 
 it('uses the key as the label when no label is given', function (): void {
